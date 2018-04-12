@@ -72,7 +72,8 @@ biocLite("GenomicRanges")
 biocLite("IRanges")
 biocLite("seqplots")
 biocLite("BiocGenerics")
-biocLite("S4Vectors")```
+biocLite("S4Vectors")
+```
 
 After downloading ChIPSeqSpike [here](https://bioconductor.org/packages/3.7/bioc/html/ChIPSeqSpike.html), run the following command in a terminal:
 
