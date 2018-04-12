@@ -149,3 +149,17 @@ spikeSummary(csds)
 ## H3K79me2_100 0.10244954 0.05738227 9760903 17426985
 ## input 0.14037080 NA 7123989 NA
 ```
+
+### Comparing the percentage of exogenous DNA relative to the endogenous DNA
+
+An important parameter to keep in mind when performing spike-in with ChIP-seq is the percentage of exogenous DNA relative to that of endogenous DNA. The amount of exogenous DNA should be between 2-25% of endogenous DNA. The method getRatio returns the percentage of exogenous DNA and throws a warning if this percentage is not within the 2-25% range. In theory, having more than 25% exogenous DNA should not affect the normalization, whereas having less than 2% is usually not sufficient to perform a reliable normalization.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+getRatio(csds_test)
+## Warning in (function (ratio, expname) : H3K79me2_50 contains more than 25% of endogenous DNA.
+## Warning in (function (ratio, expname) : H3K79me2_100 contains more than 25% of endogenous DNA.
+## Percentage Exo
+## H3K79me2_0 20.0
+## H3K79me2_50 25.6
+## H3K79me2_100 54.6
+```
