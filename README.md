@@ -51,7 +51,7 @@ You can download the material for this workshop below:
 
 ### Required R packages and versions.
 
-We will need the devel version of R (v3.5) and Bioconductor (v3.6) with the following packages.
+We will need the devel version of R v(3.5) and Bioconductor (v3.7) with the following packages. To install R-devel you can follow this [tutorial](http://singmann.org/installing-r-devel-on-linux/).
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 install.packages("tools", dependencies=TRUE)
@@ -72,6 +72,11 @@ biocLite("GenomicRanges")
 biocLite("IRanges")
 biocLite("seqplots")
 biocLite("BiocGenerics")
-biocLite("S4Vectors")
+biocLite("S4Vectors")```
+
+After downloading ChIPSeqSpike [here](https://bioconductor.org/packages/3.7/bioc/html/ChIPSeqSpike.html), run the following command in a terminal:
+
+```console
+sudo bash R-devel CMD INSTALL ChIPSeqSpike_0.99.22.tar.gz
 ```
 
