@@ -104,14 +104,14 @@ genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
 output_folder <- "mypath/workshop_files"
 
-#Observe the structure of the info.csv file
+##Observe the structure of the info.csv file
 info_file <- read.csv(info_file_csv)
 head(info_file)
-## expName      endogenousBam     exogenousBam
+## expName			endogenousBam					exogenousBam
 ## 1 H3K79me2_0		H3K79me2_0_hg19-filtered.bam		H3K79me2_0_dm3-filtered.bam
 ## 2 H3K79me2_50	H3K79me2_50_hg19-filtered.bam		H3K79me2_50_dm3-filtered.bam
 ## 3 H3K79me2_100 	H3K79me2_100_hg19-filtered.bam 	H3K79me2_100_dm3-filtered.bam
-## inputBam     bigWigEndogenous      bigWigInput
+## inputBam						bigWigEndogenous				bigWigInput
 ## 1 input_0_hg19-filtered.bam 		H3K79me2_0-filtered.bw 		input_0-filtered.bw
 ## 2 input_50_hg19-filtered.bam		H3K79me2_50-filtered.bw		input_50-filtered.bw
 ## 3 input_100_hg19-filtered.bam	H3K79me2_100-filtered.bw		input_100-filtered.bw
@@ -125,5 +125,21 @@ If one have access to high performance computing facilities, ChIPSeqSpike offers
 csds_test <- spikeDataset(info_file_csv, bam_path, bigwig_path)
 is(csds_test)
 ## [1] "ChIPSeqSpikeDatasetList"
+```
+
+A ChIPSeqSpikeDataset object, at this point, is made of slots storing paths to files. In order to compute scaling factors, bam counts are first computed. A scaling factor is defined as 1000000/bam_count. The method estimateScalingFactors returns bam counts and endogenous/exogenous scaling factors for all experiments.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+csds_test <- estimateScalingFactors(csds_test, verbose = FALSE)
+
+## Visualization of the scaling factors
+spikeSummary(csds)
+## endoScalFact exoScalFact endoCount exoCount
+## H3K79me2_0 0.04046008 0.15618313 24715719 6402740
+## input 0.06852631 NA 14592936 NA
+## H3K79me2_50 0.04779062 0.12081979 20924609 8276790
+## input 0.16936140 NA 5904533 NA
+## H3K79me2_100 0.10244954 0.05738227 9760903 17426985
+## input 0.14037080 NA 7123989 NA
 ```
 
