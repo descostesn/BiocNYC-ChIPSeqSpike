@@ -13,7 +13,7 @@ This workshop will not cover the data pre-processing and already processed BAM a
 
 ### Covering today
 
-* Background on ChIP-Seq spike-in (see [pdf]( BiocNYC-ChIPSeqSpike/BioconductorMeetupAp2018.pdf ))
+* Background on ChIP-Seq spike-in (see [pdf](https://github.com/descostesn/BiocNYC-ChIPSeqSpike/blob/master/BioconductorMeetupAp2018.pdf))
 
 * Construction of objects containing all files necessary for proper scaling
 
