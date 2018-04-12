@@ -51,7 +51,7 @@ You can download the material for this workshop below:
 
 ### Required R packages and versions.
 
-We will need the devel version of R v(3.5) and Bioconductor (v3.6) with the following packages.
+We will need the devel version of R (v3.5) and Bioconductor (v3.6) with the following packages.
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 install.packages("tools", dependencies=TRUE)
