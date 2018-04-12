@@ -2,7 +2,7 @@
 
 # Performing ChIP-Seq data scaling with spike-in control in R/Bioconductor
 
-04/19/2018 - BiocNYC
+04/19/2018
 
 ## Introduction
 
@@ -13,7 +13,7 @@ This workshop will not cover the data pre-processing and already processed BAM a
 
 ### Covering today
 
-* Background on ChIP-Seq spike-in (see [pdf]())
+* Background on ChIP-Seq spike-in (see [pdf]( BiocNYC-ChIPSeqSpike/BioconductorMeetupAp2018.pdf ))
 
 * Construction of objects containing all files necessary for proper scaling
 
