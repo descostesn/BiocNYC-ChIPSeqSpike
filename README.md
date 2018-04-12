@@ -47,3 +47,31 @@ You can download the material for this workshop below:
 * input_50: [hg19.bw](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50.bw), [dm3.bam](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_dm3.bam), [hg19.bam](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_hg19.bam)
 
 * input_100: [hg19.bw](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100.bw), [dm3.bam](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_dm3.bam), [hg19.bam](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_hg19.bam)
+
+
+### Required R packages and versions.
+
+We will need the devel version of R v(>=3.5) and Bioconductor (v3.6) with the following packages.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+install.packages("tools", dependencies=TRUE)
+install.packages("stringr", dependencies=TRUE)
+install.packages("ggplot2", dependencies=TRUE)
+install.packages("LSD", dependencies=TRUE)
+install.packages("corrplot", dependencies=TRUE)
+install.packages("methods", dependencies=TRUE)
+install.packages("stats", dependencies=TRUE)
+install.packages("grDevices", dependencies=TRUE)
+install.packages("graphics", dependencies=TRUE)
+install.packages("utils", dependencies=TRUE)
+
+source("https://bioconductor.org/biocLite.R")
+biocLite("rtracklayer")
+biocLite("Rsamtools")
+biocLite("GenomicRanges")
+biocLite("IRanges")
+biocLite("seqplots")
+biocLite("BiocGenerics")
+biocLite("S4Vectors")
+```
+
