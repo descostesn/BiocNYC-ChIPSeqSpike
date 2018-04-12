@@ -79,7 +79,8 @@ biocLite("GenomicRanges")
 biocLite("IRanges")
 biocLite("seqplots")
 biocLite("BiocGenerics")
-biocLite("S4Vectors")```
+biocLite("S4Vectors")
+```
 
 After downloading ChIPSeqSpike [here](https://bioconductor.org/packages/3.7/bioc/html/ChIPSeqSpike.html), run the following command in a terminal:
 
@@ -106,11 +107,11 @@ output_folder <- "mypath/workshop_files"
 #Observe the structure of the info.csv file
 info_file <- read.csv(info_file_csv)
 head(info_file)
-## expName    endogenousBam   exogenousBam
+## expName      endogenousBam     exogenousBam
 ## 1 H3K79me2_0		H3K79me2_0_hg19-filtered.bam		H3K79me2_0_dm3-filtered.bam
 ## 2 H3K79me2_50	H3K79me2_50_hg19-filtered.bam		H3K79me2_50_dm3-filtered.bam
 ## 3 H3K79me2_100 	H3K79me2_100_hg19-filtered.bam 	H3K79me2_100_dm3-filtered.bam
-## inputBam   bigWigEndogenous    bigWigInput
+## inputBam     bigWigEndogenous      bigWigInput
 ## 1 input_0_hg19-filtered.bam 		H3K79me2_0-filtered.bw 		input_0-filtered.bw
 ## 2 input_50_hg19-filtered.bam		H3K79me2_50-filtered.bw		input_50-filtered.bw
 ## 3 input_100_hg19-filtered.bam	H3K79me2_100-filtered.bw		input_100-filtered.bw
