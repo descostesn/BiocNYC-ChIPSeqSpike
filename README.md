@@ -91,6 +91,8 @@ sudo bash R-devel CMD INSTALL ChIPSeqSpike_0.99.22.tar.gz
 
 ## S4 object generation, summary and controls
 
+### Data preparation and info file
+
 First define the different pathes and folders needed:
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
@@ -118,6 +120,8 @@ head(info_file)
 ```
 The different data necessary for proper spike-in scaling are provided in a csv or a tab separated txt file. The columns must contain proper names and are organized as follows: Experiment name (expName); bam file name of data aligned to the endogenous reference genome (endogenousBam); bam file name of data aligned to the exogenous reference genome (exogenousBam); the corresponding input DNA bam file aligned to the endogenous reference genome (inputBam); the fixed steps bigwig file name of data aligned to the endogenous reference genome (bigWigEndogenous) and the fixed steps bigwig file names of the corresponding input DNA experiment aligned to the endogenous reference genome (bigWigInput).
 
+### ChIPSeqSpike dataset object 
+
 From the info file, two kinds of objects can be generated: either a ChIPSeqSpikeDataset or a ChIPSeqSpikeDatasetList depending upon the number of input DNA experiments. A ChIPSeqSpikeDatasetList object is a list of ChIPSeqSpikeDataset object that is created if several input DNA experiments are used. In this latter case, ChIP-Seq experiments are grouped by their corresponding input DNA. The function spikeDataset creates automatically the suitable object. The folder path to the bam and fixed steps bigwig files must be provided.
 If one have access to high performance computing facilities, ChIPSeqSpike offers a boost mode. This mode stores binding scores for each experiment in a GRanges object. Refer to the package vignette for more details as this mode will not be used today.
 
@@ -127,12 +131,15 @@ is(csds_test)
 ## [1] "ChIPSeqSpikeDatasetList"
 ```
 
+### Computing the scaling factors
+
 A ChIPSeqSpikeDataset object, at this point, is made of slots storing paths to files. In order to compute scaling factors, bam counts are first computed. A scaling factor is defined as 1000000/bam_count. The method estimateScalingFactors returns bam counts and endogenous/exogenous scaling factors for all experiments.
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 csds_test <- estimateScalingFactors(csds_test, verbose = FALSE)
 
 ## Visualization of the scaling factors
+
 spikeSummary(csds)
 ## endoScalFact exoScalFact endoCount exoCount
 ## H3K79me2_0 0.04046008 0.15618313 24715719 6402740
@@ -142,4 +149,3 @@ spikeSummary(csds)
 ## H3K79me2_100 0.10244954 0.05738227 9760903 17426985
 ## input 0.14037080 NA 7123989 NA
 ```
-
