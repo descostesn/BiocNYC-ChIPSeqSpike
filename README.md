@@ -280,3 +280,33 @@ csds_test <- scaling(csds_test, type = "exo")
 }
 ```
 
+## IV- Data visualization
+
+ChIPSeqSpike offers several graphical methods for normalization diagnosis and data exploration. These choices enable one to visualize each step of the normalization through exploring intersamples differences using profiles, heatmaps, boxplots and correlation plots.
+
+### IV-1 Extracting binding values
+
+The last step of data processing is to extract and format binding scores in order to use plotting methods. The ‘extractBinding’ method extracts binding scores at different locations and stores these values in the form of PlotSetArray objects and matrices (see ?extractBinding for more details). The scores are retrieved on annotations provided in a gff file. If one wishes to focus on peaks, their coordinates should be submitted at this step. The genome name must also be provided. For details about installing the required BSgenome package corresponding to the endogenous organism, see the BSgenome package documentation.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+if (.Platform$OS.type != "windows") {
+csds_test <- extractBinding(csds_test, gff_vec, genome_name)
+}
+```
+
+### IV-2 Visualization by gene meta-profiles
+
+The first step of spike-in normalized ChIP-Seq data analysis is an inter-sample comparison by meta-gene or meta-annotation profiling. The method ‘plotProfile’ automatically plots all experiments at the start, midpoint, end and composite locations of the annotations provided to the method extractBinding in gff format.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+
+## Plot spiked-in data - figure 1
+plotProfile(csds, legends = TRUE)
+
+## Add profiles before transformation
+plotProfile(csds, legends = TRUE, notScaled=TRUE)
+```
+
+
+![Meta-gene profiles of H3K79me2 treated at 0, 50 and 100% EPZ5676 inhibitor on all Hg19 refseq genes \label{figure1}](profile2.pdf)
+
