@@ -21,6 +21,8 @@ Because this package is still in development and waiting for a first release, an
 
 * Computation and evaluation of scaling factors 
 
+* Step by step scaling procedure
+
 * Data Visualization
 
 
