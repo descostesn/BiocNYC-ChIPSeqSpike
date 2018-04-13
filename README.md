@@ -296,16 +296,26 @@ csds_test <- extractBinding(csds_test, gff_vec, genome_name)
 
 ### IV-2 Visualization by gene meta-profiles
 
-The first step of spike-in normalized ChIP-Seq data analysis is an inter-sample comparison by meta-gene or meta-annotation profiling. The method ‘plotProfile’ automatically plots all experiments at the start, midpoint, end and composite locations of the annotations provided to the method extractBinding in gff format.
+The first step of spike-in normalized ChIP-Seq data analysis is an inter-sample comparison by meta-gene or meta-annotation profiling. The method ‘plotProfile’ automatically plots all experiments at the start, midpoint, end and composite locations of the annotations provided to the method extractBinding in gff format. The effect of each transformation on a particular experiment can be visualized with 'plotTransform'.
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 
 ## Plot spiked-in data - figure 1
 plotProfile(csds, legends = TRUE)
 
-## Add profiles before transformation
+## Add profiles before transformation - figure 2
 plotProfile(csds, legends = TRUE, notScaled=TRUE)
+
+## Visualize the effect of each transformation on each experiment - figure 3
+plotTransform(csds, legends = TRUE, separateWindows = TRUE);
+
 ```
 
-![Solution figure 1](profile2.pdf)     ![Solution figure 2](profile4.pdf)
+
+![Solution figure 1](profile2.pdf) 
+
+![Solution figure 2](profile4.pdf)
+
+![Solution figure 3](transform5.pdf)
+
 
