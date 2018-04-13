@@ -371,3 +371,40 @@ boxplotSpike(csds,rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TR
 
 *Solution figure 9*
 ![solution figure 9](boxplot11.png)
+
+
+### IV-5 Visualization with correlation plots
+
+The 'plotCor' method plots the correlation between ChIP-seq experiments using heatscatter plot or, if heatscatterplot = FALSE, correlation tables. For heatscatter plots, ChIPSeqSpike makes use of the heatscatter function of the package LSD and the corrplot function of the package corrplot is used to generate correlation tables. This offers a wide range of graphical possibilities for assessing the correlation between experiments and transformation steps (see documentation for more details).
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+## Log transform correlation plot of spiked data with heatscatter representation - figure 10
+plotCor(csds, rawFile = FALSE, rpmFile = FALSE,  bgsubFile = FALSE,  revFile = FALSE, spiked = TRUE,  main = "heatscatter",  method_cor = "spearman", add_contour = FALSE,  nlevels = 10,  color_contour = "black", method_scale = "log",  allOnPanel = TRUE, separateWindows = FALSE,  verbose = FALSE)
+
+## Plot as above with raw data - figure 11
+plotCor(csds, rawFile = TRUE, rpmFile = FALSE,  bgsubFile = FALSE,  revFile = FALSE, spiked = FALSE,  main = "heatscatter",  method_cor = "spearman", add_contour = FALSE,  nlevels = 10,  color_contour = "black", method_scale = "log",  allOnPanel = TRUE, separateWindows = FALSE,  verbose = FALSE)
+
+## Correlation table comparing all transformations - figure 12
+corr_matrix <- plotCor(csds, rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TRUE, spiked = TRUE, heatscatterplot = FALSE, verbose = TRUE)
+```
+
+*Solution figure 10*
+![solution figure 10](corr4.png)
+
+*Solution figure 11*
+![solution figure 11](corr8.png)
+
+*Solution figure 12*
+![solution figure 12](corr6.png)
+
+
+## Future developments
+
+As indicated in the introduction, ChIPSeqSpike is a package at an early stage of development that is waiting its first release in the Bioconductor master branch.
+
+The future developments will include:
+
+- Providing a method to extract bed files from scaled bigwigs to perform peak calling for instance with MACS2.
+- Providing pre-processing methods to perform a complete analysis.
+- Providing diverse differential binding analysis solutions directly on the existing objects.
+- Providing more visualization methods such as PCA and MA plots.
