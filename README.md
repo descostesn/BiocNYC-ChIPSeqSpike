@@ -127,13 +127,13 @@ First define the different pathes and folders needed:
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 library("ChIPSeqSpike")
 
-info_file_csv <- "mypath/workshop_files/info.csv"
-bam_path <- "mypath/workshop_files"
-bigwig_path <- "mypath/workshop_files"
-gff_vec <- "mypath/workshop_files/refseq_hg19.gff"
+info_file_csv <- "./info.csv"
+bam_path <- "./"
+bigwig_path <- "./"
+gff_vec <- "./refseq_hg19.gff"
 genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
-output_folder <- "mypath/workshop_files"
+output_folder <- "./workshop_files"
 
 ## II-2 Observe the structure of the info.csv file
 
