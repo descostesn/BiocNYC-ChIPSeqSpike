@@ -61,7 +61,7 @@ Create a folder 'workshop_files' containing all the downloaded files. You can ru
 
 ```console
 mkdir workshop_files
-cd workshohp_files
+cd workshop_files
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_dm3.bam
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_hg19.bam
