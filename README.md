@@ -274,7 +274,9 @@ csds_test <- scaling(csds_test, reverse = TRUE)
 
 Finally, exogenous scaling factors are applied to the data.
 
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
 csds_test <- scaling(csds_test, type = "exo")
 }
+```
 
