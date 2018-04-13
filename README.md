@@ -166,12 +166,13 @@ is(csds_test)
 
 A ChIPSeqSpikeDataset object, at this point, is made of slots storing paths to files. In order to compute scaling factors, bam counts are first computed. A scaling factor is defined as 1000000/bam_count. The method estimateScalingFactors returns bam counts and endogenous/exogenous scaling factors for all experiments.
 
+**Takes ~2 min on Intel Core i7-4790 CPU @ 3.60GHz**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 csds_test <- estimateScalingFactors(csds_test, verbose = TRUE)
 
 ## Visualization of the scaling factors
 
-spikeSummary(csds)
+spikeSummary(csds_test)
 ## endoScalFact exoScalFact endoCount exoCount
 ## H3K79me2_0 0.04046008 0.15618313 24715719 6402740
 ## input 0.06852631 NA 14592936 NA
@@ -185,6 +186,7 @@ spikeSummary(csds)
 
 An important parameter to keep in mind when performing spike-in with ChIP-seq is the percentage of exogenous DNA relative to that of endogenous DNA. The amount of exogenous DNA should be between 2-25% of endogenous DNA. The method getRatio returns the percentage of exogenous DNA and throws a warning if this percentage is not within the 2-25% range. In theory, having more than 25% exogenous DNA should not affect the normalization, whereas having less than 2% is usually not sufficient to perform a reliable normalization.
 
+**Takes ~1 min on Intel Core i7-4790 CPU @ 3.60GHz**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 getRatio(csds_test)
 ## Warning in (function (ratio, expname) : H3K79me2_50 contains more than 25% of endogenous DNA.
@@ -272,6 +274,7 @@ spikePipe <- function(infoFile, bamPath, bigWigPath, anno, genome_version,
 
 The first normalization applied to the data is the ‘Reads Per Million’ (RPM) mapped reads. The method ‘scaling’ is used to achieve such normalization using default parameters. It is also used to reverse the RPM normalization and apply exogenous scaling factors.
 
+**Takes ~10 min on Intel Core i7-4790 CPU @ 3.60GHz**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
 csds_test <- scaling(csds_test, outputFolder = output_folder)
