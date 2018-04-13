@@ -311,11 +311,37 @@ plotTransform(csds, legends = TRUE, separateWindows = TRUE);
 
 ```
 
+*Solution figure 1*
+![Solution figure 1](profile2.png) 
 
-![Solution figure 1](profile2.pdf) 
-
-![Solution figure 2](profile4.pdf)
+*Solution figure 2*
+![Solution figure 2](profile4.png)
 
 ![Solution figure 3](transform5.pdf)
 
 
+### IV-3 Visualization by heatmaps
+
+plotHeatmaps is a versatile method based on the plotHeatmap method of the seqplots package (Stempor and Ahringer 2016). This method enables one to represent data at different locations (start, end, midpoint, composite) and at different stages of the normalization process. Different scaling (log, zscore, etc) and different clustering approaches (k-means, hierarchical, etc) can be used (see documentation for more details).
+
+In this tutorial, only three different representations are tested to illustrate this function.
+
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+## Heatmap of spiked H3K79me2 signal at TSS sorted by decreasing levels - figure 4
+plotHeatmaps(csds, location = "start", transformType = "spiked", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 1, clustering_method = "none", include_exp_vec = NULL, auto_scale = FALSE)
+
+## Corresponding heatmap of the raw data - figure 5
+plotHeatmaps(csds, location = "start", transformType = "raw", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 1, clustering_method = "none", include_exp_vec = NULL, auto_scale = FALSE)
+
+## Two groups k-means clustering of the spiked-in data - figure 6
+plotHeatmaps(csds, location = "start", transformType = "spiked", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 2, clustering_method = "kmeans", include_exp_vec = NULL, auto_scale = FALSE)
+```
+*Solution figure 4*
+![solution figure 4](heatmap1.png)
+
+*Solution figure 5*
+![solution figure 5](heatmap8.png)
+
+*Solution figure 6*
+![solution figure 6](heatmap14.png)
