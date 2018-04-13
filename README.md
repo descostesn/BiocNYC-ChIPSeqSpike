@@ -57,7 +57,32 @@ You can download the material for this workshop below:
 * Gene annotations: [refseq_hg19.gff](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff)
 
 
-Create a folder 'workshop_files' containing all the downloaded files.
+Create a folder 'workshop_files' containing all the downloaded files. You can run the following code:
+
+```console
+mkdir workshop_files
+cd workshohp_files
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_dm3.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_hg19.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50.bw
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50_dm3.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50_hg19.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100.bw
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100_dm3.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100_hg19.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0.bw
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0_dm3.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0_hg19.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50.bw
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_dm3.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_hg19.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100.bw
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_dm3.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_hg19.bam
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/info.csv
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff
+```
 
 
 ### I-3 Required R packages and versions.
