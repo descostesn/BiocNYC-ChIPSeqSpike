@@ -306,7 +306,7 @@ plotProfile(csds, legends = TRUE)
 ## Add profiles before transformation
 plotProfile(csds, legends = TRUE, notScaled=TRUE)
 ```
+<img src="profile2.pdf" alt="some text"  width="4200" height="4200">
 
-
-![Meta-gene profiles of H3K79me2 treated at 0, 50 and 100% EPZ5676 inhibitor on all Hg19 refseq genes](profile2.pdf)
+![Meta-gene profiles of H3K79me2 treated at 0, 50 and 100 EPZ5676 inhibitor on all Hg19 refseq genes](profile2.pdf)
 
