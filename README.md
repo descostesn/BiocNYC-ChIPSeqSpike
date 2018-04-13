@@ -82,6 +82,7 @@ wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_dm3.bam
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_hg19.bam
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/info.csv
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff
+cd ..
 ```
 
 
@@ -127,13 +128,13 @@ First define the different pathes and folders needed:
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 library("ChIPSeqSpike")
 
-info_file_csv <- "./info.csv"
-bam_path <- "./"
-bigwig_path <- "./"
-gff_vec <- "./refseq_hg19.gff"
+info_file_csv <- "workshop_files/info.csv"
+bam_path <- "workshop_files/"
+bigwig_path <- "workshop_files/"
+gff_vec <- "workshop_files/refseq_hg19.gff"
 genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
-output_folder <- "./workshop_files"
+output_folder <- "workshop_files/workshop_files"
 
 ## II-2 Observe the structure of the info.csv file
 
