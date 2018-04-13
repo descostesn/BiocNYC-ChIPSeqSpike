@@ -294,7 +294,7 @@ csds_test <- extractBinding(csds_test, gff_vec, genome_name)
 }
 ```
 
-### IV-2 Visualization by gene meta-profiles
+### IV-2 Visualization with gene meta-profiles
 
 The first step of spike-in normalized ChIP-Seq data analysis is an inter-sample comparison by meta-gene or meta-annotation profiling. The method ‘plotProfile’ automatically plots all experiments at the start, midpoint, end and composite locations of the annotations provided to the method extractBinding in gff format. The effect of each transformation on a particular experiment can be visualized with 'plotTransform'.
 
@@ -311,6 +311,7 @@ plotTransform(csds, legends = TRUE, separateWindows = TRUE);
 
 ```
 
+
 *Solution figure 1*
 ![Solution figure 1](profile2.png) 
 
@@ -320,7 +321,7 @@ plotTransform(csds, legends = TRUE, separateWindows = TRUE);
 ![Solution figure 3](transform5.pdf)
 
 
-### IV-3 Visualization by heatmaps
+### IV-3 Visualization with heatmaps
 
 plotHeatmaps is a versatile method based on the plotHeatmap method of the seqplots package (Stempor and Ahringer 2016). This method enables one to represent data at different locations (start, end, midpoint, composite) and at different stages of the normalization process. Different scaling (log, zscore, etc) and different clustering approaches (k-means, hierarchical, etc) can be used (see documentation for more details).
 
@@ -345,3 +346,28 @@ plotHeatmaps(csds, location = "start", transformType = "spiked", legend = TRUE, 
 
 *Solution figure 6*
 ![solution figure 6](heatmap14.png)
+
+
+### IV-4 Visualization with Boxplots
+
+'boxplotSpike' plots boxplots of the mean values of ChIP-seq experiments on the annotations given to the extractBinding method. It offers a wide range of graphical representations that includes violin plots (see documentation for details). 
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+## Boxplot of the spiked-in data - figure 7
+boxplotSpike(csds, outline = FALSE)
+
+## Boxplot of the raw data - figure 8
+boxplotSpike(csds,rawFile = TRUE, spiked = FALSE, outline=FALSE)
+
+## Boxplot of all transformations - figure 9
+boxplotSpike(csds,rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TRUE, spiked = TRUE, outline = FALSE)
+```
+
+*Solution figure 7*
+![solution figure 7](boxplot2.png)
+
+*Solution figure 8*
+![solution figure 8](boxplot10.png)
+
+*Solution figure 9*
+![solution figure 9](boxplot11.png)
