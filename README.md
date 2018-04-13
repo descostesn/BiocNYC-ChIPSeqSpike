@@ -167,7 +167,7 @@ is(csds_test)
 A ChIPSeqSpikeDataset object, at this point, is made of slots storing paths to files. In order to compute scaling factors, bam counts are first computed. A scaling factor is defined as 1000000/bam_count. The method estimateScalingFactors returns bam counts and endogenous/exogenous scaling factors for all experiments.
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
-csds_test <- estimateScalingFactors(csds_test, verbose = FALSE)
+csds_test <- estimateScalingFactors(csds_test, verbose = TRUE)
 
 ## Visualization of the scaling factors
 
