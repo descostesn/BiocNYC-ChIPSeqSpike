@@ -308,5 +308,5 @@ plotProfile(csds, legends = TRUE, notScaled=TRUE)
 ```
 
 
-![Meta-gene profiles of H3K79me2 treated at 0, 50 and 100% EPZ5676 inhibitor on all Hg19 refseq genes \label{figure1}](profile2.pdf)
+![Meta-gene profiles of H3K79me2 treated at 0, 50 and 100% EPZ5676 inhibitor on all Hg19 refseq genes](profile2.pdf)
 
