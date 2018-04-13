@@ -4,14 +4,16 @@
 
 04/19/2018
 
-## Introduction
+## I- Introduction
 
 In this workshop, we will look at performing ChIP-Seq data scaling with spike-in controls. We will use 'ChIPSeqSpike' that is a new package at an early stage of development. You will learn how to perform the spike-in scaling properly and to visualize the different transformations in R. You will also be able to compare the effect of an inhibitor treatment on the Histone 3 Lysine 79 di-methylation (H3K79me2).
 
 This workshop will not cover the data pre-processing and already processed BAM and BIGWIG files will be provided.
 
+Because this package is still in development and waiting for a first release, any suggestion of features to add to the package will be much appreciated. Future developments are indicated at the end of this tutorial.
 
-### Covering today
+
+### I-1 Covering today
 
 * Background on ChIP-Seq spike-in (see [pdf](https://github.com/descostesn/BiocNYC-ChIPSeqSpike/blob/master/BioconductorMeetupAp2018.pdf))
 
@@ -22,7 +24,7 @@ This workshop will not cover the data pre-processing and already processed BAM a
 * Data Visualization
 
 
-### The data
+### I-2 The data
 
 In this workshop we will make use of one dataset of published data. This dataset is coming from the article:
 
@@ -56,7 +58,7 @@ You can download the material for this workshop below:
 Create a folder 'workshop_files' containing all the downloaded files.
 
 
-### Required R packages and versions.
+### I-3 Required R packages and versions.
 
 We will need the devel version of R v(3.5) and Bioconductor (v3.7) with the following packages. To install R-devel you can follow this [tutorial](http://singmann.org/installing-r-devel-on-linux/).
 
@@ -89,9 +91,9 @@ sudo bash R-devel CMD INSTALL ChIPSeqSpike_0.99.22.tar.gz
 ```
 
 
-## S4 object generation, summary and controls
+## II- S4 object generation, summary and controls
 
-### Data preparation and info file
+### II-1 Data preparation and info file
 
 First define the different pathes and folders needed:
 
@@ -106,7 +108,8 @@ genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
 output_folder <- "mypath/workshop_files"
 
-##Observe the structure of the info.csv file
+## II-2 Observe the structure of the info.csv file
+
 info_file <- read.csv(info_file_csv)
 head(info_file)
 ## expName			endogenousBam					exogenousBam
@@ -120,7 +123,7 @@ head(info_file)
 ```
 The different data necessary for proper spike-in scaling are provided in a csv or a tab separated txt file. The columns must contain proper names and are organized as follows: Experiment name (expName); bam file name of data aligned to the endogenous reference genome (endogenousBam); bam file name of data aligned to the exogenous reference genome (exogenousBam); the corresponding input DNA bam file aligned to the endogenous reference genome (inputBam); the fixed steps bigwig file name of data aligned to the endogenous reference genome (bigWigEndogenous) and the fixed steps bigwig file names of the corresponding input DNA experiment aligned to the endogenous reference genome (bigWigInput).
 
-### ChIPSeqSpike dataset object 
+### II-3 ChIPSeqSpike dataset object 
 
 From the info file, two kinds of objects can be generated: either a ChIPSeqSpikeDataset or a ChIPSeqSpikeDatasetList depending upon the number of input DNA experiments. A ChIPSeqSpikeDatasetList object is a list of ChIPSeqSpikeDataset object that is created if several input DNA experiments are used. In this latter case, ChIP-Seq experiments are grouped by their corresponding input DNA. The function spikeDataset creates automatically the suitable object. The folder path to the bam and fixed steps bigwig files must be provided.
 If one have access to high performance computing facilities, ChIPSeqSpike offers a boost mode. This mode stores binding scores for each experiment in a GRanges object. Refer to the package vignette for more details as this mode will not be used today.
@@ -131,7 +134,7 @@ is(csds_test)
 ## [1] "ChIPSeqSpikeDatasetList"
 ```
 
-### Computing the scaling factors
+### II-4 Computing the scaling factors
 
 A ChIPSeqSpikeDataset object, at this point, is made of slots storing paths to files. In order to compute scaling factors, bam counts are first computed. A scaling factor is defined as 1000000/bam_count. The method estimateScalingFactors returns bam counts and endogenous/exogenous scaling factors for all experiments.
 
@@ -150,7 +153,7 @@ spikeSummary(csds)
 ## input 0.14037080 NA 7123989 NA
 ```
 
-### Comparing the percentage of exogenous DNA relative to the endogenous DNA
+### II-5 Comparing the percentage of exogenous DNA relative to the endogenous DNA
 
 An important parameter to keep in mind when performing spike-in with ChIP-seq is the percentage of exogenous DNA relative to that of endogenous DNA. The amount of exogenous DNA should be between 2-25% of endogenous DNA. The method getRatio returns the percentage of exogenous DNA and throws a warning if this percentage is not within the 2-25% range. In theory, having more than 25% exogenous DNA should not affect the normalization, whereas having less than 2% is usually not sufficient to perform a reliable normalization.
 
@@ -163,3 +166,115 @@ getRatio(csds_test)
 ## H3K79me2_50 25.6
 ## H3K79me2_100 54.6
 ```
+
+## III- The spike-in scaling procedure step by step
+
+The spike-in normalization procedure consists of 4 steps: RPM scaling, input DNA subtraction, RPM scaling reversal and exogenous spike-in DNA scaling. The different steps are available in a wrapper function ‘spikePipe’. We will not use this function today, however the code of this function is as follows:
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+spikePipe <- function(infoFile, bamPath, bigWigPath, anno, genome_version, 
+                paired = FALSE, binsize = 50, profile_length_before = 2000, 
+                profile_length_after= 2000, mean_or_median = "mean", 
+                interpolation_number = 100, interpolation_average = 10000,
+                ignore_strand = FALSE, verbose = FALSE, boost = FALSE, 
+                outputFolder = NULL){
+            
+            if(.Platform$OS.type != 'windows') {
+                csds <- spikeDataset(infoFile, bamPath, bigWigPath, boost, 
+                        verbose)
+                
+                if(verbose)
+                    message("\n\n\t\t ### Step 1. Computing scaling factors ",
+                            "###")
+                
+                csds <- estimateScalingFactors(csds, paired, verbose)
+                
+                if(verbose)
+                    message("\n\n\t\t ### Step 2. RPM scaling ###")
+                
+                csds <- scaling(csds, verbose = verbose, 
+                        outputFolder = outputFolder)
+                
+                if(verbose)
+                    message("\n\n\t\t ### Step 3. Input Subtraction ###")
+                
+                csds <- inputSubtraction(csds, verbose)
+                
+                if(verbose)
+                    message("\n\n\t\t ### Step 4. Reverse RPM scaling ###")
+                
+                csds <- scaling(csds, reverse = TRUE, verbose = verbose)
+                
+                if(verbose)
+                    message("\n\n\t\t ### Step 5. Spike-in scaling ###")
+                
+                csds <- scaling(csds, type = "exo", verbose = verbose)
+                
+                if(boost){
+                    if(verbose)
+                        message("\n\n\t\t ### Step 6. Writing spiked files ",
+                                "###")
+                    
+                    exportBigWigs(csds, verbose)
+                }
+                
+                if(boost){
+                    if(verbose)
+                        message("\n\n\t\t ### Step 7. Extract values ###")
+                }else{
+                    if(verbose)
+                        message("\n\n\t\t ### Step 6. Extract values ###")
+                }
+                
+                csds <- extractBinding(csds, anno, genome_version, binsize, 
+                        profile_length_before, profile_length_after, 
+                        mean_or_median, interpolation_number, 
+                        interpolation_average, ignore_strand, verbose)
+                
+                return(csds)
+            }else{
+                stop("As of rtracklayer >= 1.37.6, BigWig is not ",
+                        "supported on Windows.")
+            }
+        }
+
+```
+
+### III-1 RPM scaling
+
+The first normalization applied to the data is the ‘Reads Per Million’ (RPM) mapped reads. The method ‘scaling’ is used to achieve such normalization using default parameters. It is also used to reverse the RPM normalization and apply exogenous scaling factors.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+if (.Platform$OS.type != "windows") {
+csds_test <- scaling(csds_test, outputFolder = output_folder)
+}
+```
+
+### III-2 Input subtraction
+
+When Immuno-Precipitating (IP) DNA bound by a given protein, a control is needed to distinguish background noise from true signal. This is typically achieved by performing a mock IP, omitting the use of antibody. After mock IP sequencing, one can notice peaks of signal above background. These peaks have to be removed from the experiment since they represent false positives. The inputSubtraction method simply subtracts scores of the input DNA experiment from the corresponding ones.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+if (.Platform$OS.type != "windows") {
+csds_test <- inputSubtraction(csds_test)
+}
+```
+
+### III-3 RPM scaling reversal
+
+After RPM and input subtraction normalization, the RPM normalization is reversed in order for the data to be normalized by the exogenous scaling factors.
+
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+if (.Platform$OS.type != "windows") {
+csds_test <- scaling(csds_test, reverse = TRUE)
+}
+```
+
+### III-4 Exogenous Scaling
+
+Finally, exogenous scaling factors are applied to the data.
+
+if (.Platform$OS.type != "windows") {
+csds_test <- scaling(csds_test, type = "exo")
+}
+
