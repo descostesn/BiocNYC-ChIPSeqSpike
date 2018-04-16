@@ -128,6 +128,7 @@ First define the different pathes and folders needed:
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 library("ChIPSeqSpike")
 
+## If working on the whole dataset
 info_file_csv <- "workshop_files/info.csv"
 bam_path <- "workshop_files"
 bigwig_path <- "workshop_files"
@@ -135,6 +136,25 @@ gff_vec <- "workshop_files/refseq_hg19.gff"
 genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
 output_folder <- "workshop_files"
+
+## For the first part of this workshop, we will use the test dataset of the package. Running time is indicated for the whole dataset at each step
+info_file_csv <- system.file("extdata/info.csv", package="ChIPSeqSpike")
+bam_path <- system.file("extdata/bam_files", package="ChIPSeqSpike")
+bigwig_path <- system.file("extdata/bigwig_files", package="ChIPSeqSpike")
+gff_vec <- system.file("extdata/test_coord.gff", package="ChIPSeqSpike")
+genome_name <- "hg19"
+output_folder <- "workshop_files"
+bigwig_files <- system.file("extdata/bigwig_files",
+c("H3K79me2_0-filtered.bw",
+"H3K79me2_100-filtered.bw",
+"H3K79me2_50-filtered.bw",
+"input_0-filtered.bw",
+"input_100-filtered.bw",
+"input_50-filtered.bw"), package="ChIPSeqSpike")
+## Copying example files
+dir.create(output_folder)
+mock <- file.copy(bigwig_files, output_folder)
+
 
 ## II-2 Observe the structure of the info.csv file
 
