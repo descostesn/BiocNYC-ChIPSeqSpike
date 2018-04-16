@@ -354,7 +354,7 @@ The last step of data processing is to extract and format binding scores in orde
 
 ## Since extracting binding values is time consuming if using the whole dataset, 
 ## we will just upload the processed data (takes ~1 min)
-load("treatedData.Rdat")
+load("workshop_files/treatedData.Rdat")
 
 ## Skip these lines if not using the whole dataset
 if (.Platform$OS.type != "windows") {
