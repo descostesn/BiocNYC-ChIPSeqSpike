@@ -316,6 +316,7 @@ csds_test <- inputSubtraction(csds_test)
 
 After RPM and input subtraction normalization, the RPM normalization is reversed in order for the data to be normalized by the exogenous scaling factors.
 
+**Takes ~4 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
 csds_test <- scaling(csds_test, reverse = TRUE)
