@@ -137,25 +137,6 @@ genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
 output_folder <- "workshop_files"
 
-## For the first part of this workshop, we will use the test dataset of the package. Running time is indicated for the whole dataset at each step
-info_file_csv <- system.file("extdata/info.csv", package="ChIPSeqSpike")
-bam_path <- system.file("extdata/bam_files", package="ChIPSeqSpike")
-bigwig_path <- system.file("extdata/bigwig_files", package="ChIPSeqSpike")
-gff_vec <- system.file("extdata/test_coord.gff", package="ChIPSeqSpike")
-genome_name <- "hg19"
-output_folder <- "workshop_files"
-bigwig_files <- system.file("extdata/bigwig_files",
-c("H3K79me2_0-filtered.bw",
-"H3K79me2_100-filtered.bw",
-"H3K79me2_50-filtered.bw",
-"input_0-filtered.bw",
-"input_100-filtered.bw",
-"input_50-filtered.bw"), package="ChIPSeqSpike")
-## Copying example files
-dir.create(output_folder)
-mock <- file.copy(bigwig_files, output_folder)
-
-
 ## II-2 Observe the structure of the info.csv file
 
 info_file <- read.csv(info_file_csv)
@@ -296,6 +277,29 @@ The first normalization applied to the data is the ‘Reads Per Million’ (RPM)
 
 **Takes ~10 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+
+## For this workshop, and due to computation time, we will use the test dataset provided with the package
+## For the first part of this workshop, we will use the test dataset of the package. Running time is indicated for the whole dataset at each step
+info_file_csv <- system.file("extdata/info.csv", package="ChIPSeqSpike")
+bam_path <- system.file("extdata/bam_files", package="ChIPSeqSpike")
+bigwig_path <- system.file("extdata/bigwig_files", package="ChIPSeqSpike")
+gff_vec <- system.file("extdata/test_coord.gff", package="ChIPSeqSpike")
+genome_name <- "hg19"
+output_folder <- "workshop_files"
+bigwig_files <- system.file("extdata/bigwig_files",
+c("H3K79me2_0-filtered.bw",
+"H3K79me2_100-filtered.bw",
+"H3K79me2_50-filtered.bw",
+"input_0-filtered.bw",
+"input_100-filtered.bw",
+"input_50-filtered.bw"), package="ChIPSeqSpike")
+## Copying example files
+dir.create(output_folder)
+mock <- file.copy(bigwig_files, output_folder)
+
+## Create the object on the test dataset
+csds_test <- spikeDataset(info_file_csv, bam_path, bigwig_path)
+
 if (.Platform$OS.type != "windows") {
 csds_test <- scaling(csds_test, outputFolder = output_folder)
 }
@@ -344,6 +348,11 @@ The last step of data processing is to extract and format binding scores in orde
 
 **Takes ~13 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
+
+## Since extracting binding values is time consuming if using the whole dataset, we will just upload the processed data
+load("treatedData.Rdat")
+
+## Skip these lines if not using the whole dataset
 if (.Platform$OS.type != "windows") {
 csds_test <- extractBinding(csds_test, gff_vec, genome_name)
 }
