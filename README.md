@@ -38,7 +38,7 @@ This dataset is made of bigwig and bam files of H3K79me2 ChIP-Seq data and corre
 
 The whole dataset is accessible at [GSE60104](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60104). Specifically, the data used are H3K79me2 0% (GSM1465004), H3K79me2 50% (GSM1465006), H3K79me2 100% (GSM1465008), input DNA 0% (GSM1511465), input DNA 50% (GSM1511467) and input DNA 100% (GSM1511469).
 
-You can download the material for this workshop below:
+You can download the material for this workshop or use the commands indicated below:
 
 * H3K79me2_0: [hg19.bw](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw), [dm3.bam](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_dm3.bam), [hg19.bam](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_hg19.bam)
 
