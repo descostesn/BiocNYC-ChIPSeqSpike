@@ -279,8 +279,8 @@ The first normalization applied to the data is the ‘Reads Per Million’ (RPM)
 **Takes ~10 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 
-## For this workshop, and due to computation time, we will use the test dataset provided with the package
-## For the first part of this workshop, we will use the test dataset of the package. Running time is indicated for the whole dataset at each step
+## For the first part of this workshop, we will use the test dataset of the package. Running time is 
+## indicated for the whole dataset at each step 
 info_file_csv <- system.file("extdata/info.csv", package="ChIPSeqSpike")
 bam_path <- system.file("extdata/bam_files", package="ChIPSeqSpike")
 bigwig_path <- system.file("extdata/bigwig_files", package="ChIPSeqSpike")
@@ -350,7 +350,8 @@ The last step of data processing is to extract and format binding scores in orde
 **Takes ~13 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 
-## Since extracting binding values is time consuming if using the whole dataset, we will just upload the processed data
+## Since extracting binding values is time consuming if using the whole dataset, 
+## we will just upload the processed data (takes ~1 min)
 load("treatedData.Rdat")
 
 ## Skip these lines if not using the whole dataset
