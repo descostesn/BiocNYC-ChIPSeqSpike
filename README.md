@@ -300,6 +300,8 @@ mock <- file.copy(bigwig_files, output_folder)
 
 ## Create the object on the test dataset
 csds_test <- spikeDataset(info_file_csv, bam_path, bigwig_path)
+## Re-estimate the scaling factors on the test dataset
+csds_test <- estimateScalingFactors(csds_test, verbose = TRUE)
 
 if (.Platform$OS.type != "windows") {
 csds_test <- scaling(csds_test, outputFolder = output_folder)
