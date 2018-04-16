@@ -82,6 +82,7 @@ wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_dm3.bam
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_hg19.bam
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/info.csv
 wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff
+wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/treatedData.Rdat
 cd ..
 ```
 
