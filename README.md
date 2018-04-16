@@ -356,13 +356,13 @@ The first step of spike-in normalized ChIP-Seq data analysis is an inter-sample 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 
 ## Plot spiked-in data - figure 1
-plotProfile(csds, legends = TRUE)
+plotProfile(csds_test, legends = TRUE)
 
 ## Add profiles before transformation - figure 2
-plotProfile(csds, legends = TRUE, notScaled=TRUE)
+plotProfile(csds_test, legends = TRUE, notScaled=TRUE)
 
 ## Visualize the effect of each transformation on each experiment - figure 3
-plotTransform(csds, legends = TRUE, separateWindows = TRUE);
+plotTransform(csds_test, legends = TRUE, separateWindows = TRUE);
 
 ```
 
@@ -385,13 +385,13 @@ In this tutorial, only three different representations are tested to illustrate 
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 ## Heatmap of spiked H3K79me2 signal at TSS sorted by decreasing levels - figure 4
-plotHeatmaps(csds, location = "start", transformType = "spiked", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 1, clustering_method = "none", include_exp_vec = NULL, auto_scale = FALSE)
+plotHeatmaps(csds_test, location = "start", transformType = "spiked", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 1, clustering_method = "none", include_exp_vec = NULL, auto_scale = FALSE)
 
 ## Corresponding heatmap of the raw data - figure 5
-plotHeatmaps(csds, location = "start", transformType = "raw", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 1, clustering_method = "none", include_exp_vec = NULL, auto_scale = FALSE)
+plotHeatmaps(csds_test, location = "start", transformType = "raw", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 1, clustering_method = "none", include_exp_vec = NULL, auto_scale = FALSE)
 
 ## Two groups k-means clustering of the spiked-in data - figure 6
-plotHeatmaps(csds, location = "start", transformType = "spiked", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 2, clustering_method = "kmeans", include_exp_vec = NULL, auto_scale = FALSE)
+plotHeatmaps(csds_test, location = "start", transformType = "spiked", legend = TRUE, plot_scale = "no",sort_rows = "decreasing", nb_of_groups = 2, clustering_method = "kmeans", include_exp_vec = NULL, auto_scale = FALSE)
 ```
 *Solution figure 4*
 ![solution figure 4](heatmap1.png)
@@ -409,13 +409,13 @@ plotHeatmaps(csds, location = "start", transformType = "spiked", legend = TRUE, 
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 ## Boxplot of the spiked-in data - figure 7
-boxplotSpike(csds, outline = FALSE)
+boxplotSpike(csds_test, outline = FALSE)
 
 ## Boxplot of the raw data - figure 8
-boxplotSpike(csds,rawFile = TRUE, spiked = FALSE, outline=FALSE)
+boxplotSpike(csds_test,rawFile = TRUE, spiked = FALSE, outline=FALSE)
 
 ## Boxplot of all transformations - figure 9
-boxplotSpike(csds,rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TRUE, spiked = TRUE, outline = FALSE)
+boxplotSpike(csds_test,rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TRUE, spiked = TRUE, outline = FALSE)
 ```
 
 *Solution figure 7*
@@ -434,13 +434,13 @@ The 'plotCor' method plots the correlation between ChIP-seq experiments using he
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 ## Log transform correlation plot of spiked data with heatscatter representation - figure 10
-plotCor(csds, rawFile = FALSE, rpmFile = FALSE,  bgsubFile = FALSE,  revFile = FALSE, spiked = TRUE,  main = "heatscatter",  method_cor = "spearman", add_contour = FALSE,  nlevels = 10,  color_contour = "black", method_scale = "log",  allOnPanel = TRUE, separateWindows = FALSE,  verbose = FALSE)
+plotCor(csds_test, rawFile = FALSE, rpmFile = FALSE,  bgsubFile = FALSE,  revFile = FALSE, spiked = TRUE,  main = "heatscatter",  method_cor = "spearman", add_contour = FALSE,  nlevels = 10,  color_contour = "black", method_scale = "log",  allOnPanel = TRUE, separateWindows = FALSE,  verbose = FALSE)
 
 ## Plot as above with raw data - figure 11
-plotCor(csds, rawFile = TRUE, rpmFile = FALSE,  bgsubFile = FALSE,  revFile = FALSE, spiked = FALSE,  main = "heatscatter",  method_cor = "spearman", add_contour = FALSE,  nlevels = 10,  color_contour = "black", method_scale = "log",  allOnPanel = TRUE, separateWindows = FALSE,  verbose = FALSE)
+plotCor(csds_test, rawFile = TRUE, rpmFile = FALSE,  bgsubFile = FALSE,  revFile = FALSE, spiked = FALSE,  main = "heatscatter",  method_cor = "spearman", add_contour = FALSE,  nlevels = 10,  color_contour = "black", method_scale = "log",  allOnPanel = TRUE, separateWindows = FALSE,  verbose = FALSE)
 
 ## Correlation table comparing all transformations - figure 12
-corr_matrix <- plotCor(csds, rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TRUE, spiked = TRUE, heatscatterplot = FALSE, verbose = TRUE)
+corr_matrix <- plotCor(csds_test, rawFile = TRUE, rpmFile = TRUE, bgsubFile = TRUE, revFile = TRUE, spiked = TRUE, heatscatterplot = FALSE, verbose = TRUE)
 ```
 
 *Solution figure 10*
