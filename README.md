@@ -56,6 +56,8 @@ You can download the material for this workshop or use the commands indicated be
 
 * Gene annotations: [refseq_hg19.gff](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff)
 
+* Processed data: [treated_data.Rdat](http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/treatedData.Rdat)
+
 
 Create a folder 'workshop_files' containing all the downloaded files. You can run the following code:
 
