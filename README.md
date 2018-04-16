@@ -327,6 +327,7 @@ csds_test <- scaling(csds_test, reverse = TRUE)
 
 Finally, exogenous scaling factors are applied to the data.
 
+**Takes ~5 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
 csds_test <- scaling(csds_test, type = "exo")
