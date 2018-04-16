@@ -342,6 +342,7 @@ ChIPSeqSpike offers several graphical methods for normalization diagnosis and da
 
 The last step of data processing is to extract and format binding scores in order to use plotting methods. The ‘extractBinding’ method extracts binding scores at different locations and stores these values in the form of PlotSetArray objects and matrices (see ?extractBinding for more details). The scores are retrieved on annotations provided in a gff file. If one wishes to focus on peaks, their coordinates should be submitted at this step. The genome name must also be provided. For details about installing the required BSgenome package corresponding to the endogenous organism, see the BSgenome package documentation.
 
+**Takes ~13 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
 csds_test <- extractBinding(csds_test, gff_vec, genome_name)
