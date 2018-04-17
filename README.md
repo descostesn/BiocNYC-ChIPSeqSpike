@@ -94,18 +94,17 @@ cd ..
 We will need the devel version of R v(3.5) and Bioconductor (v3.7) with the following packages. To install R-devel you can follow this [tutorial](http://singmann.org/installing-r-devel-on-linux/).
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
-install.packages("tools", dependencies=TRUE)
-install.packages("stringr", dependencies=TRUE)
-install.packages("ggplot2", dependencies=TRUE)
-install.packages("LSD", dependencies=TRUE)
-install.packages("corrplot", dependencies=TRUE)
-install.packages("methods", dependencies=TRUE)
-install.packages("stats", dependencies=TRUE)
-install.packages("grDevices", dependencies=TRUE)
-install.packages("graphics", dependencies=TRUE)
-install.packages("utils", dependencies=TRUE)
-
 source("https://bioconductor.org/biocLite.R")
+biocLite("tools", dependencies=TRUE)
+biocLite("stringr", dependencies=TRUE)
+biocLite("ggplot2", dependencies=TRUE)
+biocLite("LSD", dependencies=TRUE)
+biocLite("corrplot", dependencies=TRUE)
+biocLite("methods", dependencies=TRUE)
+biocLite("stats", dependencies=TRUE)
+biocLite("grDevices", dependencies=TRUE)
+biocLite("graphics", dependencies=TRUE)
+biocLite("utils", dependencies=TRUE)
 biocLite("rtracklayer")
 biocLite("Rsamtools")
 biocLite("GenomicRanges")
