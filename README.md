@@ -138,9 +138,11 @@ gff_vec <- "workshop_files/refseq_hg19.gff"
 genome_name <- "hg19";
 col_vec <- c("red", "blue", "green");
 output_folder <- "workshop_files"
+```
 
 ## II-2 Observe the structure of the info.csv file
 
+```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 info_file <- read.csv(info_file_csv)
 head(info_file)
 ## expName			endogenousBam					exogenousBam
