@@ -62,12 +62,6 @@ You can download the material for this workshop or use the commands indicated be
 Create a folder 'workshop_files' containing all the downloaded files. You can run the following code:
 
 ```{r}
-dir.create("workshop_files")
-setwd("workshop_files")`
-download("http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw")
-```
-
-```{r}
 needed.files <- c("http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw",
                   "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_dm3.bam",
                   "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_hg19.bam",
@@ -94,7 +88,7 @@ needed.files <- c("http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2
 ```{r}
 dir.create("workshop_files")
 setwd("workshop_files")
-for (f in needed.files){
+for (f in needed.files[!needed.files %in% basename(f)]){
   download.file(f, destfile = basename(f))
 }
 setwd("..")
