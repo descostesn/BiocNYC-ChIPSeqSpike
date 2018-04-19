@@ -61,31 +61,43 @@ You can download the material for this workshop or use the commands indicated be
 
 Create a folder 'workshop_files' containing all the downloaded files. You can run the following code:
 
-```console
-mkdir workshop_files
-cd workshop_files
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_dm3.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_hg19.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50.bw
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50_dm3.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50_hg19.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100.bw
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100_dm3.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100_hg19.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0.bw
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0_dm3.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0_hg19.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50.bw
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_dm3.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_hg19.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100.bw
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_dm3.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_hg19.bam
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/info.csv
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff
-wget http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/treatedData.Rdat
-cd ..
+```{r}
+dir.create("workshop_files")
+setwd("workshop_files")`
+download("http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw")
+```
+
+```{r}
+needed.files <- c("http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0.bw",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_dm3.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_0_hg19.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50.bw",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50_dm3.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_50_hg19.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100.bw",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100_dm3.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2_100_hg19.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0.bw",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0_dm3.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_0_hg19.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50.bw",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_dm3.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_50_hg19.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100.bw",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_dm3.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/input_100_hg19.bam",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/info.csv",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/refseq_hg19.gff",
+                  "http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/treatedData.Rdat")
+```
+
+```{r}
+dir.create("workshop_files")
+setwd("workshop_files")
+for (f in needed.files){
+  download.file(f, destfile = basename(f))
+}
+setwd("..")
 ```
 
 
@@ -123,14 +135,6 @@ output_folder <- "workshop_files"
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 info_file <- read.csv(info_file_csv)
 head(info_file)
-## expName			endogenousBam					exogenousBam
-## 1 H3K79me2_0		H3K79me2_0_hg19-filtered.bam		H3K79me2_0_dm3-filtered.bam
-## 2 H3K79me2_50	H3K79me2_50_hg19-filtered.bam		H3K79me2_50_dm3-filtered.bam
-## 3 H3K79me2_100 	H3K79me2_100_hg19-filtered.bam 	H3K79me2_100_dm3-filtered.bam
-## inputBam						bigWigEndogenous				bigWigInput
-## 1 input_0_hg19-filtered.bam 		H3K79me2_0-filtered.bw 		input_0-filtered.bw
-## 2 input_50_hg19-filtered.bam		H3K79me2_50-filtered.bw		input_50-filtered.bw
-## 3 input_100_hg19-filtered.bam	H3K79me2_100-filtered.bw		input_100-filtered.bw
 ```
 The different data necessary for proper spike-in scaling are provided in a csv or a tab separated txt file. The columns must contain proper names and are organized as follows: Experiment name (expName); bam file name of data aligned to the endogenous reference genome (endogenousBam); bam file name of data aligned to the exogenous reference genome (exogenousBam); the corresponding input DNA bam file aligned to the endogenous reference genome (inputBam); the fixed steps bigwig file name of data aligned to the endogenous reference genome (bigWigEndogenous) and the fixed steps bigwig file names of the corresponding input DNA experiment aligned to the endogenous reference genome (bigWigInput).
 
@@ -142,7 +146,6 @@ If one have access to high performance computing facilities, ChIPSeqSpike offers
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 csds_test <- spikeDataset(info_file_csv, bam_path, bigwig_path)
 is(csds_test)
-## [1] "ChIPSeqSpikeDatasetList"
 ```
 
 ### II-4 Computing the scaling factors
@@ -172,12 +175,6 @@ An important parameter to keep in mind when performing spike-in with ChIP-seq is
 **Takes ~1 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 getRatio(csds_test)
-## Warning in (function (ratio, expname) : H3K79me2_50 contains more than 25% of endogenous DNA.
-## Warning in (function (ratio, expname) : H3K79me2_100 contains more than 25% of endogenous DNA.
-## Percentage Exo
-## H3K79me2_0 20.0
-## H3K79me2_50 25.6
-## H3K79me2_100 54.6
 ```
 
 ## III- The spike-in scaling procedure step by step
@@ -186,70 +183,70 @@ The spike-in normalization procedure consists of 4 steps: RPM scaling, input DNA
 
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 spikePipe <- function(infoFile, bamPath, bigWigPath, anno, genome_version, 
-                paired = FALSE, binsize = 50, profile_length_before = 2000, 
-                profile_length_after= 2000, mean_or_median = "mean", 
-                interpolation_number = 100, interpolation_average = 10000,
-                ignore_strand = FALSE, verbose = FALSE, boost = FALSE, 
-                outputFolder = NULL){
-            
-            if(.Platform$OS.type != 'windows') {
-                csds <- spikeDataset(infoFile, bamPath, bigWigPath, boost, 
-                        verbose)
-                
-                if(verbose)
-                    message("\n\n\t\t ### Step 1. Computing scaling factors ",
-                            "###")
-                
-                csds <- estimateScalingFactors(csds, paired, verbose)
-                
-                if(verbose)
-                    message("\n\n\t\t ### Step 2. RPM scaling ###")
-                
-                csds <- scaling(csds, verbose = verbose, 
-                        outputFolder = outputFolder)
-                
-                if(verbose)
-                    message("\n\n\t\t ### Step 3. Input Subtraction ###")
-                
-                csds <- inputSubtraction(csds, verbose)
-                
-                if(verbose)
-                    message("\n\n\t\t ### Step 4. Reverse RPM scaling ###")
-                
-                csds <- scaling(csds, reverse = TRUE, verbose = verbose)
-                
-                if(verbose)
-                    message("\n\n\t\t ### Step 5. Spike-in scaling ###")
-                
-                csds <- scaling(csds, type = "exo", verbose = verbose)
-                
-                if(boost){
-                    if(verbose)
-                        message("\n\n\t\t ### Step 6. Writing spiked files ",
-                                "###")
-                    
-                    exportBigWigs(csds, verbose)
-                }
-                
-                if(boost){
-                    if(verbose)
-                        message("\n\n\t\t ### Step 7. Extract values ###")
-                }else{
-                    if(verbose)
-                        message("\n\n\t\t ### Step 6. Extract values ###")
-                }
-                
-                csds <- extractBinding(csds, anno, genome_version, binsize, 
-                        profile_length_before, profile_length_after, 
-                        mean_or_median, interpolation_number, 
-                        interpolation_average, ignore_strand, verbose)
-                
-                return(csds)
-            }else{
-                stop("As of rtracklayer >= 1.37.6, BigWig is not ",
-                        "supported on Windows.")
-            }
-        }
+                      paired = FALSE, binsize = 50, profile_length_before = 2000, 
+                      profile_length_after= 2000, mean_or_median = "mean", 
+                      interpolation_number = 100, interpolation_average = 10000,
+                      ignore_strand = FALSE, verbose = FALSE, boost = FALSE, 
+                      outputFolder = NULL){
+  
+  if(.Platform$OS.type != 'windows') {
+    csds <- spikeDataset(infoFile, bamPath, bigWigPath, boost, 
+                         verbose)
+    
+    if(verbose)
+      message("\n\n\t\t ### Step 1. Computing scaling factors ",
+              "###")
+    
+    csds <- estimateScalingFactors(csds, paired, verbose)
+    
+    if(verbose)
+      message("\n\n\t\t ### Step 2. RPM scaling ###")
+    
+    csds <- scaling(csds, verbose = verbose, 
+                    outputFolder = outputFolder)
+    
+    if(verbose)
+      message("\n\n\t\t ### Step 3. Input Subtraction ###")
+    
+    csds <- inputSubtraction(csds, verbose)
+    
+    if(verbose)
+      message("\n\n\t\t ### Step 4. Reverse RPM scaling ###")
+    
+    csds <- scaling(csds, reverse = TRUE, verbose = verbose)
+    
+    if(verbose)
+      message("\n\n\t\t ### Step 5. Spike-in scaling ###")
+    
+    csds <- scaling(csds, type = "exo", verbose = verbose)
+    
+    if(boost){
+      if(verbose)
+        message("\n\n\t\t ### Step 6. Writing spiked files ",
+                "###")
+      
+      exportBigWigs(csds, verbose)
+    }
+    
+    if(boost){
+      if(verbose)
+        message("\n\n\t\t ### Step 7. Extract values ###")
+    }else{
+      if(verbose)
+        message("\n\n\t\t ### Step 6. Extract values ###")
+    }
+    
+    csds <- extractBinding(csds, anno, genome_version, binsize, 
+                           profile_length_before, profile_length_after, 
+                           mean_or_median, interpolation_number, 
+                           interpolation_average, ignore_strand, verbose)
+    
+    return(csds)
+  }else{
+    stop("As of rtracklayer >= 1.37.6, BigWig is not ",
+         "supported on Windows.")
+  }
+}
 
 ```
 
@@ -269,12 +266,12 @@ gff_vec <- system.file("extdata/test_coord.gff", package="ChIPSeqSpike")
 genome_name <- "hg19"
 output_folder <- "workshop_files"
 bigwig_files <- system.file("extdata/bigwig_files",
-c("H3K79me2_0-filtered.bw",
-"H3K79me2_100-filtered.bw",
-"H3K79me2_50-filtered.bw",
-"input_0-filtered.bw",
-"input_100-filtered.bw",
-"input_50-filtered.bw"), package="ChIPSeqSpike")
+                            c("H3K79me2_0-filtered.bw",
+                              "H3K79me2_100-filtered.bw",
+                              "H3K79me2_50-filtered.bw",
+                              "input_0-filtered.bw",
+                              "input_100-filtered.bw",
+                              "input_50-filtered.bw"), package="ChIPSeqSpike")
 ## Copying example files
 dir.create(output_folder)
 mock <- file.copy(bigwig_files, output_folder)
@@ -285,7 +282,7 @@ csds_test <- spikeDataset(info_file_csv, bam_path, bigwig_path)
 csds_test <- estimateScalingFactors(csds_test, verbose = TRUE)
 
 if (.Platform$OS.type != "windows") {
-csds_test <- scaling(csds_test, outputFolder = output_folder)
+  csds_test <- scaling(csds_test, outputFolder = output_folder)
 }
 ```
 
@@ -296,7 +293,7 @@ When Immuno-Precipitating (IP) DNA bound by a given protein, a control is needed
 **Takes ~26 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
-csds_test <- inputSubtraction(csds_test)
+  csds_test <- inputSubtraction(csds_test)
 }
 ```
 
@@ -307,7 +304,7 @@ After RPM and input subtraction normalization, the RPM normalization is reversed
 **Takes ~4 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
-csds_test <- scaling(csds_test, reverse = TRUE)
+  csds_test <- scaling(csds_test, reverse = TRUE)
 }
 ```
 
@@ -318,7 +315,7 @@ Finally, exogenous scaling factors are applied to the data.
 **Takes ~5 min on Intel Core i7-4790 CPU @ 3.60GHz for the whole dataset**
 ```{r packages, echo=TRUE,eval=FALSE,cache=FALSE}
 if (.Platform$OS.type != "windows") {
-csds_test <- scaling(csds_test, type = "exo")
+  csds_test <- scaling(csds_test, type = "exo")
 }
 ```
 
@@ -339,7 +336,7 @@ load("workshop_files/treatedData.Rdat")
 
 ## Skip these lines if not using the whole dataset
 if (.Platform$OS.type != "windows") {
-csds_test <- extractBinding(csds_test, gff_vec, genome_name)
+  csds_test <- extractBinding(csds_test, gff_vec, genome_name)
 }
 ```
 
