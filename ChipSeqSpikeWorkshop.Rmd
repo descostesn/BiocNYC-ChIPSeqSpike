@@ -1,4 +1,13 @@
-# BiocNYC-ChIPSeqSpike
+---
+title: "BiocNYC-ChIPSeqSpike"
+author: "Nicolas Descostes"
+date: "4/19/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache=TRUE)
+```
 
 # Performing ChIP-Seq data scaling with spike-in control in R/Bioconductor
 
@@ -87,11 +96,9 @@ needed.files <- c("http://www.hpc.med.nyu.edu/~descon01/biocnycworkshop/H3K79me2
 
 ```{r}
 dir.create("workshop_files")
-setwd("workshop_files")
 for (f in needed.files[!needed.files %in% basename(f)]){
-  download.file(f, destfile = basename(f))
+  download.file(f, destfile = file.path("workshop_files", basename(f)))
 }
-setwd("..")
 ```
 
 
